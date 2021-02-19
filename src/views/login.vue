@@ -1,22 +1,10 @@
-<!-- 注册页面 -->
+<!-- 登录页面 -->
 <template>
   <div id="loginPage">
-    <login-top Text="注册">
-      <router-link to="/login" slot="right" style="font-size:3.889vw">登录</router-link>
+    <login-top Text="登录">
+     <router-link to="/register" slot="right" style="font-size:3.889vw">注册</router-link>
     </login-top>
-
-    <van-field
-      v-model="form.name"
-      label="姓名"
-      class="name"
-      placeholder="请输入姓名"
-    />
-    <van-field
-      v-model="form.username"
-      label="账号"
-      placeholder="请输入账号"
-      class="inputItem"
-    />
+    <van-field v-model="form.username" label="账号" placeholder="请输入账号" class="inputItem" />
     <van-field
       v-model="form.password"
       label="密码"
@@ -24,7 +12,7 @@
       placeholder="请输入密码"
     />
 
-    <login-btn BtnText="注册" @TextClick="doRegister"></login-btn>
+    <login-btn BtnText="登录" @TextClick="login"></login-btn>
   </div>
 </template>
 
@@ -35,7 +23,6 @@ export default {
   data() {
     return {
       form: {
-        name: "",
         username: "",
         password: "",
       },
@@ -48,14 +35,10 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    async doRegister() {
+    async login() {
       let rule = /^.{6,16}$/;
-      if (
-        rule.test(this.form.name) &&
-        rule.test(this.form.username) &&
-        rule.test(this.form.password)
-      ) {
-        const res = await this.$http.post("/register", this.form);
+      if (rule.test(this.form.username) && rule.test(this.form.password)) {
+        const res = await this.$http.post("/login", this.form);
         this.$msg(res.data.msg);
       } else {
         this.$msg.fail("格式不正确,6-16位数据");
@@ -69,8 +52,7 @@ export default {
   .name {
     margin: 4.167vw auto;
   }
-
-  .inputItem {
+  .inputItem{
     margin: 2.778vw auto;
   }
 }
