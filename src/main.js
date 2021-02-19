@@ -7,8 +7,14 @@ import router from './router'
 // 引入vant
 import Vant from 'vant';
 import 'vant/lib/index.css';
-
 Vue.use(Vant);
+
+// 引入全局https
+import http from '../http';
+Vue.prototype.$http = http;
+
+import {Toast} from 'vant'
+Vue.prototype.$msg = Toast
 
 Vue.config.productionTip = false
 
