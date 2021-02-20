@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import VueRouter from 'vue-router';
+
 import register from '@/views/register'
 import login from "@/views/login"
 import userInfo from "../views/userInfo"
-import VueRouter from 'vue-router';
+import edit from '../views/edit.vue'
+
 
 Vue.use(Router)
 
@@ -28,7 +30,15 @@ const routes = [
     meta: {
       istoken: true
     }
-  }
+  },
+
+  {
+    path: '/edit',
+    component: edit,
+    meta: {
+      istoken: true
+    }
+  },
 
 ]
 
