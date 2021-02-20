@@ -40,6 +40,12 @@ export default {
       if (rule.test(this.form.username) && rule.test(this.form.password)) {
         const res = await this.$http.post("/login", this.form);
         this.$msg(res.data.msg);
+         localStorage.setItem('token',res.data.token) ;      
+          localStorage.setItem('id',res.data.id);
+           setTimeout(()=>{
+            this.$router.push('/userinfo');
+          },1000)
+        
       } else {
         this.$msg.fail("格式不正确,6-16位数据");
       }

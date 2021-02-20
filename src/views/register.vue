@@ -57,6 +57,14 @@ export default {
       ) {
         const res = await this.$http.post("/register", this.form);
         this.$msg(res.data.msg);
+        if(res.data.code===200){ 
+          localStorage.setItem('token',res.data.objtoken) ;      
+          localStorage.setItem('id',res.data.id);
+          setTimeout(()=>{
+            this.$router.push('/userinfo');
+          },1000)
+          
+        }
       } else {
         this.$msg.fail("格式不正确,6-16位数据");
       }

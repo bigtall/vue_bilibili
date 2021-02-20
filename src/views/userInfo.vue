@@ -1,23 +1,52 @@
 <!-- 用户信息 -->
 <template>
-  <div>
-      <nav-bar></nav-bar>
+  <div class="userinfo">
+    <nav-bar></nav-bar>
+    <img src="@/assets/bannerTop_new.png" class="topBgImage">
+    <user-detail></user-detail>
+
   </div>
 </template>
 
 <script>
-import NavBar from '../components/common/navBar.vue';
+import NavBar from "@/components/common/navBar";
+import UserDetail from "@/components/userComponent/userDetail"
 export default {
   data() {
-    return {};
+    return {
+      model:{
+
+      }
+    };
   },
   components: {
     NavBar,
+    UserDetail
   },
-  
-    NavBarcreated() {},
+
+  created() {
+    this.getUserInfo();
+  },
   mounted() {},
+  methods:{
+    async getUserInfo(){
+      console.log(localStorage.getItem('id'), 33);
+      const res =  await this.$http.get('/user/' + localStorage.getItem('id'),{
+        headers:{
+          'Authorization':'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      this.model = res.data[0];    
+
+    }
+  }
 };
 </script>
-<style scoped>
+<style scoped lang="less">
+  .userinfo{
+    .topBgImage{
+      width:100%;
+    }
+  }
+
 </style>
