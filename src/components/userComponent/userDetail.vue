@@ -34,6 +34,13 @@
 </template>
 
 <script>
+/*
+这里是注释信息
+今天
+
+
+
+*/
 export default {
     props:{
         userInfo:{

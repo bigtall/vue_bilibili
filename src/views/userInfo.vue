@@ -31,11 +31,7 @@ export default {
   methods:{
     async getUserInfo(){
       console.log(localStorage.getItem('id'), 33);
-      const res =  await this.$http.get('/user/' + localStorage.getItem('id'),{
-        headers:{
-          'Authorization':'Bearer ' + localStorage.getItem('token')
-        }
-      })
+      const res =  await this.$http.get('/user/' + localStorage.getItem('id'))
       this.model = res.data[0];    
 
     }

@@ -30,7 +30,7 @@ export default {
         }
     },
     mounted() {
-        // this.NavInit()
+        this.NavInit()
     }
 }
 </script>
