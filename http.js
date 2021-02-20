@@ -5,7 +5,7 @@ const http = axios.create({
     baseURL: 'http://112.74.99.5:3000/web/api'
 })
 
-// 增加拦截器，配置config
+// 请求拦截，配置headers
 http.interceptors.request.use(function (config) {
     // Do something before request is sent
     // 接口发送之前配置headers
@@ -18,7 +18,7 @@ http.interceptors.request.use(function (config) {
     return Promise.reject(error);
 });
 
-// 增加拦截器，配置response
+// 响应拦截，配置response
 http.interceptors.response.use(function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
