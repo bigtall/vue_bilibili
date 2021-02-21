@@ -26,7 +26,42 @@
       <edit-banner left="账号">
         <a href="javascript:;" slot="right">{{ model.username }}</a>
       </edit-banner>
+
+      <edit-banner left="性别" @bannerClick="gendershow = true">
+        <a href="javascript:;" slot="right">{{ model.gender ? "男" : "女" }}</a>
+      </edit-banner>
+
+      <edit-banner left="个签" @bannerClick="showSign = true">
+        <a href="javascript:;" slot="right">{{ model.user_desc }}</a>
+      </edit-banner>
+
+      <div class="editback" @click="$router.back()">返回个人中心</div>
     </div>
+
+    <van-dialog
+      v-model="textshow"
+      title="昵称修改"
+      @confirm="confirmName"
+      @cancel="name2 = ''"
+    >
+      <van-field v-model="name2" autofocus />
+    </van-dialog>
+
+    <van-dialog
+      v-model="showSign"
+      title="个性签名"
+      @confirm="confirmSign"
+      @cancel="name2 = ''"
+    >
+      <van-field v-model="name2" autofocus type="textarea" />
+    </van-dialog>
+
+    <van-action-sheet
+      v-model="gendershow"
+      cancel-text="取消"
+      :actions="actions"
+      @select="onSelect"
+    />
   </div>
 </template>
 
@@ -37,6 +72,14 @@ export default {
   data() {
     return {
       model: {},
+      show: false,
+      showSign: false,
+      gendershow: false,
+      name2: "",
+      actions: [
+        { name: "男", val: 1 },
+        { name: "女", val: 0 },
+      ],
     };
   },
   components: {
@@ -62,7 +105,7 @@ export default {
       const res = await this.$http.post("/upload", fromdata);
       console.log(res, "上传结果");
       this.model.user_img = res.data.url;
-      
+
       this.$forceUpdate(); // 强制刷新dom
 
       // 直接更新所有用户信息
@@ -81,6 +124,25 @@ export default {
       if (res.data.code == 200) {
         this.$msg("修改成功");
       }
+    },
+
+    confirmName() {
+      this.model.name = this.name2;
+      this.UserUpdate();
+      this.name2 = "";
+    },
+
+    confirmSign() {
+      this.model.user_desc = this.name2;
+      this.UserUpdate();
+      this.name2 = "";
+    },
+
+    // 切换性别
+    onSelect(data) {
+      this.model.gender = data.val;
+      this.UserUpdate();
+      this.gendershow = false;
     },
   },
 };
@@ -103,6 +165,18 @@ export default {
       opacity: 0;
       position: absolute;
     }
+  }
+
+  .editback {
+    margin-top: 5.556vw;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    color: #999;
+    padding: 4.167vw 0;
+    font-size: 4vw;
   }
 }
 </style>
