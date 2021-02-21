@@ -47,7 +47,7 @@ const router = new VueRouter({
   mode: 'history'
 });
 
-// 路由跳转拦截,判读
+// 路由跳转拦截,判断需要token的页面需要直接跳转到登录页面
 router.beforeEach((to, from, next) => {
   if ((!localStorage.getItem('token') || !localStorage.getItem('id')) && to.meta.istoken == true) {
     router.push('/login')
