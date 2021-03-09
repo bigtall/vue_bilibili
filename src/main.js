@@ -15,12 +15,15 @@ Vue.prototype.$http = http;
 
 import {Toast} from 'vant'
 Vue.prototype.$msg = Toast
-
 Vue.config.productionTip = false
+
+import store from './store/index'
+
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'
