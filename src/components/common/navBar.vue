@@ -1,7 +1,7 @@
 <template>
   <div class="NavBar">
       <div>
-          <img src="@/assets/logo.png" alt="" @click="$router.push('/')">
+          <img src="@/assets/logo.png" alt="" @click="$router.push('/login')">
       </div>
       <div>
           <div> <van-icon name="search" class="iconNav"/></div>

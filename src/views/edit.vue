@@ -39,7 +39,7 @@
     </div>
 
     <van-dialog
-      v-model="textshow"
+      v-model="show"
       title="昵称修改"
       @confirm="confirmName"
       @cancel="name2 = ''"
