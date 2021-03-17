@@ -2,7 +2,7 @@
 <template>
   <div class="home">
       <nav-bar></nav-bar>
-      <van-tabs v-model="active" swipeable sticky animated>
+      <van-tabs v-model="active" swipeable sticky animated >
         <van-tab v-for="(item,index) in category" :key="index" :title="item.title">
           <van-list
             v-model="item.loading"
